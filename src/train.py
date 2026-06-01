@@ -1,9 +1,12 @@
+import pandas as pd
+
 from sklearn.model_selection import train_test_split
 from transformers import (
     BertTokenizer,
     BertForSequenceClassification,
     Trainer,
-    TrainingArguments
+    TrainingArguments,
+    set_seed
 )
 from datasets import Dataset
 
@@ -16,6 +19,16 @@ def main():
     print("Carregando dataset...")
 
     ensure_dirs()
+    set_seed(42)
+
+    import os
+    model_dir = "models/bert"
+    test_split_path = "data/processed/test_split.csv"
+
+    # Se já houver modelo e split de teste, evita re-treinar/tudo de novo.
+    if os.path.exists(model_dir) and os.path.exists(test_split_path):
+        print("Modelo e test_split.csv já existem. Pulando treinamento.")
+        return
 
     df = load_dataset()
     df = preprocess_dataframe(df)
@@ -26,6 +39,15 @@ def main():
         test_size=0.2,
         random_state=42
     )
+
+    # Salvar o split de teste preprocessado para evitar data leakage na avaliação
+    # (usa exatamente os textos/labels do split criado acima)
+    test_df = pd.DataFrame({
+        "clean_text": test_texts,
+        "label": test_labels
+    })
+    test_df.to_csv("data/processed/test_split.csv", index=False)
+
 
     print("Tokenizando...")
 
@@ -74,7 +96,9 @@ def main():
         per_device_train_batch_size=4,
         per_device_eval_batch_size=4,
         save_steps=500,
-        logging_steps=100
+        logging_steps=100,
+        seed=42,
+        evaluation_strategy="no"
     )
 
     trainer = Trainer(

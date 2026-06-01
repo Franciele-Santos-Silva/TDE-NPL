@@ -15,7 +15,8 @@ def load_dataset():
         random_state=42
     ).reset_index(drop=True)
 
+    n = min(len(df), 5000)
     return df.sample(
-    n=5000,
-    random_state=42
-)
+        n=n,
+        random_state=42
+    )

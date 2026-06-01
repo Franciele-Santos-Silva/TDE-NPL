@@ -41,8 +41,14 @@ def preprocess_dataframe(df):
         clean_text
     )
 
+    import os
+
+    processed_path = "data/processed/cleaned_news.csv"
+    if os.path.exists(processed_path):
+        return df
+
     df.to_csv(
-        "data/processed/cleaned_news.csv",
+        processed_path,
         index=False
     )
 
