@@ -1,10 +1,13 @@
 venv/
+
 __pycache__/
 *.pyc
 
-models/
-results/
-
 data/raw/
+data/processed/
+
+models/
+
+results/checkpoint-*/
 
 .ipynb_checkpoints/

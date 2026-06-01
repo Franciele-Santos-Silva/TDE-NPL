@@ -1,0 +1,9 @@
+ source /home/franciele-santos-da-silva/Documentos/TDE-NPL/venv/bin/activate
+Accuracy : 0.9995
+Precision: 1.0000
+Recall   : 0.9990
+F1-Score : 0.9995
+
+Matriz de Confusão:
+[[1045    0]
+ [   1  954]]
