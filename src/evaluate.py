@@ -17,19 +17,17 @@ from transformers import (
 
 from datasets import Dataset
 
-from data_loader import load_dataset
-from preprocess import preprocess_dataframe
-
 
 def main():
+
     print("Carregando modelo...")
 
-    df = load_dataset()
+    # Carrega SOMENTE o split de teste previamente salvo
+    test_df = pd.read_csv("data/processed/test_split.csv")
 
-    df = preprocess_dataframe(df)
+    texts = test_df["clean_text"].tolist()
+    labels = test_df["label"].tolist()
 
-    texts = df["clean_text"].tolist()
-    labels = df["label"].tolist()
 
     tokenizer = BertTokenizer.from_pretrained(
         "models/bert"
@@ -40,11 +38,12 @@ def main():
     )
 
     encodings = tokenizer(
-        texts,
+        list(map(str, texts)),
         truncation=True,
         padding=True,
         max_length=256
     )
+
 
     dataset = Dataset.from_dict({
         "input_ids": encodings["input_ids"],
@@ -62,6 +61,7 @@ def main():
         predictions.predictions,
         axis=1
     )
+    # predictions.predictions pode ser logits (sem softmax); argmax é suficiente para classe
 
     acc = accuracy_score(
         labels,
