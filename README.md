@@ -62,6 +62,7 @@ TDE-NPL/
 │   ├── evaluate.py
 │   └── confusion_matrix_plot.py
 │
+├── requirements.txt
 ├── README.md
 └── .gitignore
 ```
@@ -81,6 +82,10 @@ Após o pré-processamento, os dados foram combinados em um único conjunto cont
 
 - Texto da notícia
 - Classe (Fake ou True)
+
+Dataset utilizado:
+
+https://www.kaggle.com/datasets/clmentbisaillon/fake-and-real-news-dataset
 
 ---
 
@@ -188,8 +193,74 @@ O treinamento foi realizado utilizando uma amostra de 10.000 notícias do conjun
 
 ---
 
+## Como Executar
+
+### 1. Clonar o repositório
+
+```bash
+git clone https://github.com/Franciele-Santos-Silva/TDE-Ciencia-Dados.git
+cd TDE-Ciencia-Dados
+```
+
+### 2. Criar ambiente virtual
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### 3. Instalar dependências
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Baixar o Dataset
+
+Baixe o dataset em:
+
+https://www.kaggle.com/datasets/clmentbisaillon/fake-and-real-news-dataset
+
+Após o download, coloque os arquivos:
+
+- Fake.csv
+- True.csv
+
+na pasta:
+
+```text
+data/raw/
+```
+
+### 5. Executar o projeto
+
+```bash
+python src/preprocess.py
+python src/train.py
+python src/evaluate.py
+python src/confusion_matrix_plot.py
+```
+
+---
+
 ## Conclusão
 
 Os resultados demonstraram que modelos baseados em Transformers possuem elevada capacidade para tarefas de classificação textual.
 
 O modelo alcançou 99,95% de acurácia, evidenciando sua eficácia na detecção de Fake News.
+
+---
+
+## Autor(es)
+
+Projeto desenvolvido para a disciplina:
+
+**Fundamentos de Ciência de Dados**
+
+Curso:
+
+**Análise e Desenvolvimento de Sistemas (ADS)**
+
+Instituição:
+
+**UNIFACEMA – Centro Universitário de Ciências e Tecnologia do Maranhão**
