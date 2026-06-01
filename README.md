@@ -248,19 +248,6 @@ python src/confusion_matrix_plot.py
 Os resultados demonstraram que modelos baseados em Transformers possuem elevada capacidade para tarefas de classificação textual.
 
 O modelo alcançou 99,95% de acurácia, evidenciando sua eficácia na detecção de Fake News.
-
----
-
-## Autor(es)
-
-Projeto desenvolvido para a disciplina:
-
-**Fundamentos de Ciência de Dados**
-
-Curso:
-
-**Análise e Desenvolvimento de Sistemas (ADS)**
-
 Instituição:
 
 **UNIFACEMA – Centro Universitário de Ciências e Tecnologia do Maranhão**
